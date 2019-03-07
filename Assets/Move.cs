@@ -6,13 +6,12 @@ public class Move : MonoBehaviour
     private Coroutine left;
     private Coroutine right;
 
-    //코루틴 변수 = 코루틴 실행
+    public float runSpeed = 2.0f;
 
-    //스탑코루틴(코루틴 변수)
+    public float rotSpeed = 3.0f;
 
     private void Awake()
     {
-        Debug.Log("게임시작");
         StartCoroutine(Run());
     }
 
@@ -20,48 +19,46 @@ public class Move : MonoBehaviour
     {
         for (; ; )
         {
-            transform.Translate(Vector3.forward * Time.deltaTime);
+            transform.Translate(Vector3.forward * Time.deltaTime * runSpeed);
+            yield return new WaitForSeconds(0.02f);
             yield return null;
         }
     }
 
+    private void LeftCuc() => left = StartCoroutine(LeftRotCorutine());
+
+    private void RightCuc() => right = StartCoroutine(RightRotCorutine());
+
     public void leftbutton()
     {
-        Debug.Log("왼쪽 회전");
+        Ref.Instance.LeftButton.image.sprite = Ref.Instance.Left_sprite.pressedSprite;
         LeftCuc();
     }
 
     public void rightbutton()
     {
-        Debug.Log("오른쪽 회전");
+        Ref.Instance.rightButton.image.sprite = Ref.Instance.Right_sprite.pressedSprite;
         RightCuc();
     }
 
     public void leftbuttonUp()
     {
+        Ref.Instance.LeftButton.image.sprite = Ref.Instance.Left_sprite.disabledSprite;
         StopCoroutine(left);
     }
 
     public void rightbuttonUp()
     {
+        Ref.Instance.rightButton.image.sprite = Ref.Instance.Right_sprite.disabledSprite;
         StopCoroutine(right);
-    }
-
-    private void LeftCuc()
-    {
-        left = StartCoroutine(LeftRotCorutine());
-    }
-
-    private void RightCuc()
-    {
-        right = StartCoroutine(RightRotCorutine());
     }
 
     private IEnumerator LeftRotCorutine()
     {
         for (; ; )
         {
-            transform.rotation *= Quaternion.Euler(Vector3.up * -1.0f);
+            transform.rotation *= Quaternion.Euler(Vector3.up * -rotSpeed);
+            yield return new WaitForSeconds(0.02f);
             yield return null;
         }
     }
@@ -70,7 +67,8 @@ public class Move : MonoBehaviour
     {
         for (; ; )
         {
-            transform.rotation *= Quaternion.Euler(Vector3.up * 1.0f);
+            transform.rotation *= Quaternion.Euler(Vector3.up * rotSpeed);
+            yield return new WaitForSeconds(0.02f);
             yield return null;
         }
     }
