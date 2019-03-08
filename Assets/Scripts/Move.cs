@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -6,17 +7,21 @@ using UnityEngine;
 /// </summary>
 public class Move : MonoBehaviour
 {
-    private Coroutine left;
-    private Coroutine right;
-
     public float runSpeed = 2.0f;
-
     public float rotSpeed = 3.0f;
     public Rigidbody rid;
+
+    private Coroutine left;
+    private Coroutine right;
+    private Action touchout = () => { };
+    private Vector2 touchPos = Vector2.zero;
 
     private void Awake()
     {
         StartCoroutine(Run());
+
+        touchout += RightTouchUp;
+        touchout += LeftTouchUp;
     }
 
     private IEnumerator Run()
@@ -28,8 +33,6 @@ public class Move : MonoBehaviour
             yield return null;
         }
     }
-
-    private Vector2 touchPos = Vector2.zero;
 
     private void Update()
     {
@@ -45,10 +48,7 @@ public class Move : MonoBehaviour
         }
         else if (Input.GetMouseButtonUp(0))
         {
-            if (touchPos.x <= Screen.width * 0.5)
-                LeftTouchUp();
-            else
-                RightTouchUp();
+            touchout?.Invoke();
         }
 
 #else
@@ -64,43 +64,20 @@ public class Move : MonoBehaviour
             }
             else if (Input.GetTouch(0).phase == TouchPhase.Ended)
             {
-                if (touchPos.x <= Screen.width * 0.5)
-                    LeftTouchUp();
-                else
-                    RightTouchUp();
+                touchout?.Invoke();
             }
         }
 
 #endif
     }
 
-    private void LeftCuc() => left = StartCoroutine(LeftRotCorutine());
+    public void LeftTouchDown() => left = StartCoroutine(LeftRotCorutine());
 
-    private void RightCuc() => right = StartCoroutine(RightRotCorutine());
+    public void RightTouchDown() => right = StartCoroutine(RightRotCorutine());
 
-    public void LeftTouchDown()
-    {
-        Ref.Instance.LeftButton.image.sprite = Ref.Instance.Left_sprite.pressedSprite;
-        LeftCuc();
-    }
+    public void LeftTouchUp() => StopCoroutine(left);
 
-    public void RightTouchDown()
-    {
-        Ref.Instance.rightButton.image.sprite = Ref.Instance.Right_sprite.pressedSprite;
-        RightCuc();
-    }
-
-    public void LeftTouchUp()
-    {
-        Ref.Instance.LeftButton.image.sprite = Ref.Instance.Left_sprite.disabledSprite;
-        StopCoroutine(left);
-    }
-
-    public void RightTouchUp()
-    {
-        Ref.Instance.rightButton.image.sprite = Ref.Instance.Right_sprite.disabledSprite;
-        StopCoroutine(right);
-    }
+    public void RightTouchUp() => StopCoroutine(right);
 
     private IEnumerator LeftRotCorutine()
     {
