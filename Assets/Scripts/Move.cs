@@ -29,29 +29,74 @@ public class Move : MonoBehaviour
         }
     }
 
+    private Vector2 touchPos = Vector2.zero;
+
+    private void Update()
+    {
+#if UNITY_EDITOR
+
+        touchPos = Input.mousePosition;
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (touchPos.x <= Screen.width * 0.5)
+                LeftTouchDown();
+            else
+                RightTouchDown();
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            if (touchPos.x <= Screen.width * 0.5)
+                LeftTouchUp();
+            else
+                RightTouchUp();
+        }
+
+#else
+        if (Input.touchCount > 0)
+        {
+            touchPos = Input.GetTouch(0).position;
+            if (Input.GetTouch(0).phase == TouchPhase.Began)
+            {
+                if (touchPos.x <= Screen.width * 0.5)
+                    LeftTouchDown();
+                else
+                    RightTouchDown();
+            }
+            else if (Input.GetTouch(0).phase == TouchPhase.Ended)
+            {
+                if (touchPos.x <= Screen.width * 0.5)
+                    LeftTouchUp();
+                else
+                    RightTouchUp();
+            }
+        }
+
+#endif
+    }
+
     private void LeftCuc() => left = StartCoroutine(LeftRotCorutine());
 
     private void RightCuc() => right = StartCoroutine(RightRotCorutine());
 
-    public void leftbutton()
+    public void LeftTouchDown()
     {
         Ref.Instance.LeftButton.image.sprite = Ref.Instance.Left_sprite.pressedSprite;
         LeftCuc();
     }
 
-    public void rightbutton()
+    public void RightTouchDown()
     {
         Ref.Instance.rightButton.image.sprite = Ref.Instance.Right_sprite.pressedSprite;
         RightCuc();
     }
 
-    public void leftbuttonUp()
+    public void LeftTouchUp()
     {
         Ref.Instance.LeftButton.image.sprite = Ref.Instance.Left_sprite.disabledSprite;
         StopCoroutine(left);
     }
 
-    public void rightbuttonUp()
+    public void RightTouchUp()
     {
         Ref.Instance.rightButton.image.sprite = Ref.Instance.Right_sprite.disabledSprite;
         StopCoroutine(right);
