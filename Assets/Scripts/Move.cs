@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// 좌측 우측 터치시 회전하는 방식으로 바꾸기.
+/// </summary>
 public class Move : MonoBehaviour
 {
     private Coroutine left;
@@ -9,6 +12,7 @@ public class Move : MonoBehaviour
     public float runSpeed = 2.0f;
 
     public float rotSpeed = 3.0f;
+    public Rigidbody rid;
 
     private void Awake()
     {
@@ -19,8 +23,8 @@ public class Move : MonoBehaviour
     {
         for (; ; )
         {
-            transform.Translate(Vector3.forward * Time.deltaTime * runSpeed);
-            yield return new WaitForSeconds(0.02f);
+            rid.MovePosition(transform.position + transform.forward * Time.fixedDeltaTime * runSpeed);
+
             yield return null;
         }
     }
