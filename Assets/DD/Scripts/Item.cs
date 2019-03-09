@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Item : MonoBehaviour
 {
@@ -8,6 +6,8 @@ public class Item : MonoBehaviour
     {
         other.gameObject.GetComponent<Inventory>().inventory.Enqueue(this);
         //other.gameObject.GetComponent<Inventory>().inven.Add(this);
+        //gameObject.GetComponent<Renderer>().enabled = false;
+        //gameObject.GetComponent<Renderer>().enabled = false;
         this.gameObject.SetActive(false);
     }
 

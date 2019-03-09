@@ -1,7 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(-500)]
 public class Inventory : MonoBehaviour
 {
     public List<Item> inven = new List<Item>();

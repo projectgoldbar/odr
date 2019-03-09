@@ -1080,6 +1080,7 @@ GameObject:
   - component: {fileID: 1350792366}
   - component: {fileID: 1350792371}
   - component: {fileID: 1350792372}
+  - component: {fileID: 1350792373}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -1100,7 +1101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runSpeed: 4
-  rotSpeed: 3
+  rotSpeed: 6
   rid: {fileID: 1350792372}
 --- !u!65 &1350792367
 BoxCollider:
@@ -1110,7 +1111,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1350792365}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -1203,6 +1204,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!114 &1350792373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350792365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07a9d82648d4fc1479a6e40dffe5b94d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inven: []
 --- !u!1001 &1368533805
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1341,7 +1355,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f4ecf46b5d6c23a46b207b640d06e150, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1994b8cf90ce39f45b8c0581f8f717ec, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1791,7 +1805,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1819103335}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 24.5, z: 1.6}
+  m_LocalPosition: {x: 0, y: 24.5, z: -0.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2071153774}
@@ -1823,6 +1837,7 @@ GameObject:
   - component: {fileID: 2039956033}
   - component: {fileID: 2039956032}
   - component: {fileID: 2039956031}
+  - component: {fileID: 2039956035}
   m_Layer: 11
   m_Name: Plane
   m_TagString: Untagged
@@ -1903,6 +1918,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2039956035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039956030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6419db38f97abfd4eb9396849c35e29b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemPreFab: {fileID: 8757089505268212768, guid: 9d3b9bf01ac994b4c9fa6fa184cf8c8a,
+    type: 3}
+  trapPreFab: {fileID: 8435310470337310962, guid: 839bc4185e6b0a84f93532f6247da7e9,
+    type: 3}
+  count: 20
 --- !u!1 &2071153771
 GameObject:
   m_ObjectHideFlags: 0

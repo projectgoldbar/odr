@@ -13,25 +13,23 @@ public class Move : MonoBehaviour
 
     private Coroutine left;
     private Coroutine right;
+    private Coroutine Rot;
     private Action touchout = () => { };
     private Vector2 touchPos = Vector2.zero;
 
-    private void Awake()
+    private void OnEnable()
     {
-        StartCoroutine(Run());
-
-        touchout += RightTouchUp;
-        touchout += LeftTouchUp;
+        touchout += RotTouchUp;
     }
 
-    private IEnumerator Run()
+    private void OnDisable()
     {
-        for (; ; )
-        {
-            rid.MovePosition(transform.position + transform.forward * Time.fixedDeltaTime * runSpeed);
+        touchout -= RotTouchUp;
+    }
 
-            yield return null;
-        }
+    private void Start()
+    {
+        StartCoroutine(Run());
     }
 
     private void Update()
@@ -42,9 +40,13 @@ public class Move : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             if (touchPos.x <= Screen.width * 0.5)
+            {
                 LeftTouchDown();
+            }
             else
+            {
                 RightTouchDown();
+            }
         }
         else if (Input.GetMouseButtonUp(0))
         {
@@ -71,13 +73,20 @@ public class Move : MonoBehaviour
 #endif
     }
 
-    public void LeftTouchDown() => left = StartCoroutine(LeftRotCorutine());
+    public void LeftTouchDown() => Rot = StartCoroutine(LeftRotCorutine());
 
-    public void RightTouchDown() => right = StartCoroutine(RightRotCorutine());
+    public void RightTouchDown() => Rot = StartCoroutine(RightRotCorutine());
 
-    public void LeftTouchUp() => StopCoroutine(left);
+    public void RotTouchUp() => StopCoroutine(Rot);
 
-    public void RightTouchUp() => StopCoroutine(right);
+    private IEnumerator Run()
+    {
+        for (; ; )
+        {
+            rid.MovePosition(transform.position + transform.forward * Time.fixedDeltaTime * runSpeed);
+            yield return null;
+        }
+    }
 
     private IEnumerator LeftRotCorutine()
     {
