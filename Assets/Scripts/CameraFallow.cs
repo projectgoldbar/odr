@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraFallow : MonoBehaviour
 {
     public Transform target;
     private Vector3 offset = Vector3.zero;
-    private float damp = 4.0f;
+    private float damp = 1.5f;
 
     // Update is called once per frame
     private void LateUpdate()
@@ -18,16 +17,9 @@ public class CameraFallow : MonoBehaviour
             target.position.z);
 
         transform.position = Move_vec;
+
         //Vector3.Lerp(transform.position, Move_vec, Time.deltaTime * damp);
-    }
 
-    private IEnumerator rot()
-    {
-        for (; ; )
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, target.rotation, damp);
-
-            yield return null;
-        }
+        transform.rotation = Quaternion.Slerp(transform.rotation, target.rotation, Time.smoothDeltaTime * damp);
     }
 }

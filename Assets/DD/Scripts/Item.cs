@@ -2,7 +2,7 @@
 
 public class Item : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
         other.gameObject.GetComponent<Inventory>().inventory.Enqueue(this);
         //other.gameObject.GetComponent<Inventory>().inven.Add(this);

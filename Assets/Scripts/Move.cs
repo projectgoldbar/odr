@@ -2,9 +2,6 @@
 using System.Collections;
 using UnityEngine;
 
-/// <summary>
-/// 좌측 우측 터치시 회전하는 방식으로 바꾸기.
-/// </summary>
 public class Move : MonoBehaviour
 {
     public float runSpeed = 2.0f;
@@ -93,6 +90,7 @@ public class Move : MonoBehaviour
         for (; ; )
         {
             transform.rotation *= Quaternion.Euler(Vector3.up * -rotSpeed);
+
             yield return new WaitForSeconds(0.02f);
             yield return null;
         }
@@ -103,6 +101,7 @@ public class Move : MonoBehaviour
         for (; ; )
         {
             transform.rotation *= Quaternion.Euler(Vector3.up * rotSpeed);
+
             yield return new WaitForSeconds(0.02f);
             yield return null;
         }

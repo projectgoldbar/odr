@@ -7,16 +7,6 @@ public class Ref : Singleton<Ref>
 
     public Image TargetDir_image = null;
 
-    [Header("왼쪽버튼")]
-    public Button LeftButton;
-
-    public SpriteState Left_sprite;
-
-    [Header("오른쪽버튼")]
-    public Button rightButton;
-
-    public SpriteState Right_sprite;
-
     [Header("적 대기상태 Image")]
     public Image questionmark;
 
@@ -25,13 +15,11 @@ public class Ref : Singleton<Ref>
 
     public Canvas canvas;
 
+    public float PlayerRoty;
+
     private void Start()
     {
         Screen.SetResolution(Screen.width, (Screen.width / 9) * 16, true);
-
-        LeftButton.GetComponent<RectTransform>().sizeDelta = sizeDelta();
-
-        rightButton.GetComponent<RectTransform>().sizeDelta = sizeDelta();
 
         Destination_text.GetComponent<RectTransform>().sizeDelta = sizeDelta();
     }
