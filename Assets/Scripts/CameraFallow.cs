@@ -9,7 +9,7 @@ public class CameraFallow : MonoBehaviour
     private float damp = 1.5f;
 
     private Coroutine StopRutine;
-    public static Action rotatestop = () => { };
+    public Action rotatestop = () => { };
 
     private void OnEnable()
     {
