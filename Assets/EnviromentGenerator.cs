@@ -63,7 +63,7 @@ public class EnviromentGenerator : MonoBehaviour
 
     private void EnviromentSet()
     {
-        for (int i = 0; i < 500; i++)
+        for (int i = 0; i < 150; i++)
         {
             var x = Random.Range(0, enviroPreFab.Count);
             Instantiate(enviroPreFab[x], randomVeclist[0], Quaternion.identity);
