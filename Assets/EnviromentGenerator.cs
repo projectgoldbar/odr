@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tile : MonoBehaviour
+public class EnviromentGenerator : MonoBehaviour
 {
     public GameObject itemPreFab;
     public GameObject trapPreFab;
     public int count;
+
+    public List<GameObject> enviroPreFab = new List<GameObject>();
 
     private List<GameObject> everyList = new List<GameObject>();
     private List<Item> itemList = new List<Item>();
@@ -21,6 +23,7 @@ public class Tile : MonoBehaviour
     {
         VectorSet(count);
         ItemTrapSet();
+        EnviromentSet();
     }
 
     private List<Vector3> randomVeclist = new List<Vector3>();
@@ -46,14 +49,25 @@ public class Tile : MonoBehaviour
 
     private void ItemTrapSet()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 20; i++)
         {
             Instantiate(itemPreFab, randomVeclist[0], Quaternion.identity);
             randomVeclist.RemoveAt(0);
         }
-        for (int i = 0; i < randomVeclist.Count; i++)
+        for (int i = 0; i < 20; i++)
         {
-            Instantiate(trapPreFab, randomVeclist[i], Quaternion.identity);
+            Instantiate(trapPreFab, randomVeclist[0], Quaternion.identity);
+            randomVeclist.RemoveAt(0);
+        }
+    }
+
+    private void EnviromentSet()
+    {
+        for (int i = 0; i < 500; i++)
+        {
+            var x = Random.Range(0, enviroPreFab.Count);
+            Instantiate(enviroPreFab[x], randomVeclist[0], Quaternion.identity);
+            randomVeclist.RemoveAt(0);
         }
     }
 }
