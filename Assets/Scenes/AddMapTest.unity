@@ -1207,6 +1207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07a9d82648d4fc1479a6e40dffe5b94d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemImage: {fileID: 1419030914}
   inven: []
 --- !u!1001 &1368533805
 PrefabInstance:
