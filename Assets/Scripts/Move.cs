@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Move : MonoBehaviour
 {
+    public static Action touchout = () => { };
+
     public float runSpeed = 2.0f;
     public float rotSpeed = 3.0f;
     public Rigidbody rid;
@@ -11,21 +13,23 @@ public class Move : MonoBehaviour
     private Coroutine left;
     private Coroutine right;
     private Coroutine Rot;
-    private Action touchout = () => { };
     private Vector2 touchPos = Vector2.zero;
+
+    private CameraFallow cam;
 
     private void OnEnable()
     {
-        touchout += RotTouchUp;
+        touchout += RotStop;
     }
 
     private void OnDisable()
     {
-        touchout -= RotTouchUp;
+        touchout -= RotStop;
     }
 
     private void Start()
     {
+        cam = FindObjectOfType<CameraFallow>();
         StartCoroutine(Run());
     }
 
@@ -39,15 +43,19 @@ public class Move : MonoBehaviour
             if (touchPos.x <= Screen.width * 0.5)
             {
                 LeftTouchDown();
+                CameraFallow.rotatestop?.Invoke();
             }
             else
             {
                 RightTouchDown();
+
+                CameraFallow.rotatestop?.Invoke();
             }
         }
         else if (Input.GetMouseButtonUp(0))
         {
             touchout?.Invoke();
+            CameraFallow.rotatestop += cam.CameraRotationStop;
         }
 
 #else
@@ -57,13 +65,20 @@ public class Move : MonoBehaviour
             if (Input.GetTouch(0).phase == TouchPhase.Began)
             {
                 if (touchPos.x <= Screen.width * 0.5)
+                {
                     LeftTouchDown();
+                    CameraFallow.rotatestop?.Invoke();
+                }
                 else
+                {
                     RightTouchDown();
+                    CameraFallow.rotatestop?.Invoke();
+                }
             }
             else if (Input.GetTouch(0).phase == TouchPhase.Ended)
             {
                 touchout?.Invoke();
+                 CameraFallow.rotatestop += cam.CameraRotationStop;
             }
         }
 
@@ -74,7 +89,7 @@ public class Move : MonoBehaviour
 
     public void RightTouchDown() => Rot = StartCoroutine(RightRotCorutine());
 
-    public void RotTouchUp() => StopCoroutine(Rot);
+    public void RotStop() => StopCoroutine(Rot);
 
     private IEnumerator Run()
     {

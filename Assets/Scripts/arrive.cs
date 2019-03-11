@@ -23,19 +23,31 @@ public class arrive : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        dir = (DestinationPoint.position - Player.position);
+        var player = Player.position;
+        var destinationPos = DestinationPoint.position;
+        dir = destinationPos - player;
         Ref.Instance.Destination_text.text = (distance - dir.magnitude).ToString("0") + "m";
 
         UI_Angle();
     }
 
+    private Vector2 AngelPos = Vector2.zero;
+    private Vector2 ps = new Vector2();
+
     public void UI_Angle()
     {
         Vector3 worldArrow = Camera.main.WorldToScreenPoint(Player.transform.position);
         Ref.Instance.TargetDir_image.transform.position = worldArrow;
-        var AngleDir = dir.normalized;
-        float Angle = Mathf.Atan2(AngleDir.x, AngleDir.z) * Mathf.Rad2Deg;
 
-        Ref.Instance.TargetDir_image.transform.eulerAngles = new Vector3(0, 0, -Angle);
+        var relative = Player.transform.InverseTransformPoint(DestinationPoint.transform.position); //타겟위치는 Vector3
+
+        // 각도를 구합니다.
+        var angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
+
+        //  Vector3 targetDir = DestinationPoint.transform.position - Player.transform.position;
+        //  float angle2 = Vector3.Angle(targetDir, Player.transform.forward);
+
+        // 캐릭터 회전
+        Ref.Instance.TargetDir_image.transform.rotation = Quaternion.Euler(0, 0, -angle);
     }
 }
