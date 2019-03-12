@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class Item : MonoBehaviour
 {
@@ -39,14 +40,45 @@ public class Item : MonoBehaviour
         //gameObject.GetComponent<Renderer>().enabled = false;
     }
 
+    public LayerMask TargetMask;
+    public LayerMask ObstacleMask;
+
     public void use()
     {
         Debug.Log("아이템사용");
-        var a = Physics.RaycastAll(playervecter.position, playervecter.forward, 3f, 1 << 10);
-        foreach (var item in a)
+        var a = FindVisibleTargets(playervecter, 4f, 30f, TargetMask, ObstacleMask);
+        for (int i = 0; i < a.Count; i++)
         {
-            Destroy(item.transform.gameObject);
+            a[i].GetComponent<MeshRenderer>().material.color = new Vector4(1, 1, 1, 1);
         }
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
+    }
+
+    public List<Transform> FindVisibleTargets(Transform _transform, float ViewDistance, float ViewAngle, LayerMask TargetMask, LayerMask ObstacleMask)
+    {
+        //시야거리 내에 존재하는 모든 컬라이더 받아오기
+        Collider[] targets = Physics.OverlapSphere(_transform.position, ViewDistance, TargetMask);
+        List<Transform> returnValue = new List<Transform>();
+        for (int i = 0; i < targets.Length; i++)
+        {
+            Transform target = targets[i].transform;
+
+            // 타겟까지의 단위벡터
+            Vector3 dirToTarget = (target.position - _transform.position).normalized;
+
+            //_transform.forward와 dirToTarget은 모두 단위벡터이므로 내적값은 두 벡터가 이루는 각의 Cos값과 같다.
+            //내적값이 시야각/2의 Cos값보다 크면 시야에 들어온 것이다.
+            if (Vector3.Dot(_transform.forward, dirToTarget) > Mathf.Cos((ViewAngle / 2) * Mathf.Deg2Rad))
+            //if (Vector3.Angle(_transform.forward, dirToTarget) < ViewAngle/2)
+            {
+                float distToTarget = Vector3.Distance(_transform.position, target.position);
+
+                if (!Physics.Raycast(_transform.position, dirToTarget, distToTarget, ObstacleMask))
+                {
+                    returnValue.Add(target);
+                }
+            }
+        }
+        return returnValue;
     }
 }
