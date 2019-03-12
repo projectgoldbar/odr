@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
-using System;
 using UnityEngine.UI;
 
 [DefaultExecutionOrder(-500)]
 public class Inventory : MonoBehaviour
 {
-    public Image itemImage;
+    public Image itemImage = null;
     public List<Item> inven = new List<Item>();
 
     //public Queue<Item> inventory = new Queue<Item>();

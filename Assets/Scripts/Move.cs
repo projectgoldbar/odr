@@ -8,6 +8,7 @@ public class Move : MonoBehaviour
 
     public float runSpeed = 2.0f;
     public float rotSpeed = 3.0f;
+    public float damp = 20.0f;
     public Rigidbody rid;
 
     private Coroutine left;
@@ -30,7 +31,6 @@ public class Move : MonoBehaviour
     private void Start()
     {
         cam = FindObjectOfType<CameraFallow>();
-        StartCoroutine(Run());
     }
 
     private void Update()
@@ -91,22 +91,18 @@ public class Move : MonoBehaviour
 
     public void RotStop() => StopCoroutine(Rot);
 
-    private IEnumerator Run()
+    private void FixedUpdate()
     {
-        for (; ; )
-        {
-            rid.MovePosition(transform.position + transform.forward * Time.fixedDeltaTime * runSpeed);
-            yield return null;
-        }
+        rid.MovePosition(transform.position + transform.forward * Time.fixedDeltaTime * runSpeed);
     }
 
     private IEnumerator LeftRotCorutine()
     {
         for (; ; )
         {
-            transform.rotation *= Quaternion.Euler(Vector3.up * -rotSpeed);
+            transform.rotation *= Quaternion.Euler(Vector3.up * Time.deltaTime * -rotSpeed * damp);
 
-            yield return new WaitForSeconds(0.02f);
+            //  yield return new WaitForSeconds(0.02f);
             yield return null;
         }
     }
@@ -115,9 +111,9 @@ public class Move : MonoBehaviour
     {
         for (; ; )
         {
-            transform.rotation *= Quaternion.Euler(Vector3.up * rotSpeed);
+            transform.rotation *= Quaternion.Euler(Vector3.up * Time.deltaTime * rotSpeed * damp);
 
-            yield return new WaitForSeconds(0.02f);
+            // yield return new WaitForSeconds(0.02f);
             yield return null;
         }
     }
