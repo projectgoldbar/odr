@@ -6,7 +6,9 @@ public class Item : MonoBehaviour
 {
     public Sprite itemImg;
     public int price = 1;
+
     private Transform playervecter;
+    //public Transform playervecter;
 
     private void OnCollisionEnter(Collision other)
     {
@@ -46,10 +48,10 @@ public class Item : MonoBehaviour
     public void use()
     {
         Debug.Log("아이템사용");
-        var a = FindVisibleTargets(playervecter, 4f, 30f, TargetMask, ObstacleMask);
+        var a = FindVisibleTargets(playervecter, 40f, 60f, TargetMask, ObstacleMask);
         for (int i = 0; i < a.Count; i++)
         {
-            a[i].GetComponent<MeshRenderer>().material.color = new Vector4(1, 1, 1, 1);
+            a[i].GetComponentInChildren<SkinnedMeshRenderer>().material.color = new Vector4(1, 1, 1, 1);
         }
         //Destroy(this.gameObject);
     }
