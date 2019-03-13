@@ -8,7 +8,8 @@ public class arrive : MonoBehaviour
 
     private Vector3 dir;
 
-    private Vector2 dirpos = Vector2.zero;
+    private Vector3 Myself = Vector2.zero;
+    private float dirDis;
 
     private void Awake()
     {
@@ -16,7 +17,7 @@ public class arrive : MonoBehaviour
         //float rd = Random.Range(0.0f, 360.0f);
         //delta.x = Mathf.Cos(rd) * distance;
         //delta.y = Mathf.Cos(rd) * distance;
-
+        Myself = Ref.Instance.TargetDir_image.transform.position;
         DestinationPoint.transform.position = Player.transform.position + Vector3.forward * distance;
     }
 
@@ -26,7 +27,8 @@ public class arrive : MonoBehaviour
         var player = Player.position;
         var destinationPos = DestinationPoint.position;
         dir = destinationPos - player;
-        Ref.Instance.Destination_text.text = (distance - (distance - dir.magnitude)).ToString("0") + "m";
+        dirDis = dir.magnitude;
+        Ref.Instance.Destination_text.text = (distance - (distance - dirDis)).ToString("0") + "m";
 
         UI_Angle();
     }
@@ -39,9 +41,15 @@ public class arrive : MonoBehaviour
         Vector3 worldArrow = Camera.main.WorldToScreenPoint(Player.transform.position);
         // Ref.Instance.TargetDir_image.transform.position = worldArrow;
 
-        var angle = Quaternion.LookRotation(dir).eulerAngles;
+        var angle = Quaternion.LookRotation(dir).eulerAngles.y;
 
         // UI 회전
-        Ref.Instance.TargetDir_image.transform.eulerAngles = new Vector3(0, 0, -angle.y);
+        Ref.Instance.TargetDir_image.transform.eulerAngles
+            = new Vector3(0, 0, -angle);
+
+        Ref.Instance.TargetDir_image.transform.position =
+            Myself + (dir * dirDis);
+
+        Debug.Log(dir);
     }
 }

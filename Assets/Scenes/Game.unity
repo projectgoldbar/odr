@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 56344830}
   - component: {fileID: 56344829}
   - component: {fileID: 56344831}
+  - component: {fileID: 56344832}
   m_Layer: 0
   m_Name: Progress
   m_TagString: Untagged
@@ -178,6 +179,19 @@ MonoBehaviour:
   pointer: {fileID: 114816879159379778, guid: 4275f0f6f5639a2438a8dfc1ef334c79, type: 3}
   canvas: {fileID: 1587830655}
   PlayerRoty: 0
+--- !u!114 &56344832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56344828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eace1df8da9d6b64baf54de879f789cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
 --- !u!4 &84152094 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2947555968149468974, guid: 23bcdc3e82bf1f14a9d13af7c36077c9,
@@ -1740,7 +1754,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1350792370}
   damp: 5
-  changeCameraRotion: 0
 --- !u!4 &1887756370 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2947555968149468974, guid: 23bcdc3e82bf1f14a9d13af7c36077c9,
@@ -1966,11 +1979,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
-    - target: {fileID: 2947555968149468970, guid: 23bcdc3e82bf1f14a9d13af7c36077c9,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2947555968149468974, guid: 23bcdc3e82bf1f14a9d13af7c36077c9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2026,27 +2034,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1673519483, guid: 23bcdc3e82bf1f14a9d13af7c36077c9, type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1673519483, guid: 23bcdc3e82bf1f14a9d13af7c36077c9, type: 3}
-      propertyPath: m_AngularDrag
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1673519483, guid: 23bcdc3e82bf1f14a9d13af7c36077c9, type: 3}
-      propertyPath: m_UseGravity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2947555968149469136, guid: 23bcdc3e82bf1f14a9d13af7c36077c9,
+    - target: {fileID: 8731525288626053819, guid: 23bcdc3e82bf1f14a9d13af7c36077c9,
         type: 3}
-      propertyPath: stopshame
-      value: 1
+      propertyPath: speed
+      value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 8345580334561134771, guid: 23bcdc3e82bf1f14a9d13af7c36077c9,
+    - target: {fileID: 8731525288626053819, guid: 23bcdc3e82bf1f14a9d13af7c36077c9,
         type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
+      propertyPath: gold
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23bcdc3e82bf1f14a9d13af7c36077c9, type: 3}

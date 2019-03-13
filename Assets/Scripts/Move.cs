@@ -43,18 +43,15 @@ public class Move : MonoBehaviour
             if (touchPos.x <= Screen.width * 0.5)
             {
                 LeftTouchDown();
-                cam.rotatestop?.Invoke();
             }
             else
             {
                 RightTouchDown();
-                cam.rotatestop?.Invoke();
             }
         }
         else if (Input.GetMouseButtonUp(0))
         {
             touchout?.Invoke();
-            cam.rotatestop += cam.CameraRotationStop;
         }
 
 #else
@@ -66,19 +63,15 @@ public class Move : MonoBehaviour
                 if (touchPos.x <= Screen.width * 0.5)
                 {
                     LeftTouchDown();
-
-                    cam.rotatestop?.Invoke();
                 }
                 else
                 {
                     RightTouchDown();
-                    cam.rotatestop?.Invoke();
                 }
             }
             else if (Input.GetTouch(0).phase == TouchPhase.Ended)
             {
                 touchout?.Invoke();
-                cam.rotatestop += cam.CameraRotationStop;
             }
         }
 
