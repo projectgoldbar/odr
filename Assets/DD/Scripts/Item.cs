@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class Item : MonoBehaviour
 {
     public Sprite itemImg;
-
+    public int price = 1;
     private Transform playervecter;
 
     private void OnCollisionEnter(Collision other)

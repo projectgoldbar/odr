@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class EnviromentGenerator : MonoBehaviour
 {
-    public GameObject itemPreFab;
+    private List<GameObject> itemlist;
     public GameObject trapPreFab;
     public int count;
 
     public List<GameObject> enviroPreFab = new List<GameObject>();
 
-    private List<GameObject> everyList = new List<GameObject>();
-    private List<Item> itemList = new List<Item>();
-    private List<GameObject> wallList = new List<GameObject>();
+    private void Awake()
+    {
+        itemlist = ItemGoldDataBase.instance.SpwanItemDataList;
+    }
 
     private void OnEnable()
     {
@@ -51,7 +52,7 @@ public class EnviromentGenerator : MonoBehaviour
     {
         for (int i = 0; i < 20; i++)
         {
-            Instantiate(itemPreFab, randomVeclist[0], Quaternion.identity);
+            Instantiate(itemlist[Random.Range(0, itemlist.Count)], randomVeclist[0], Quaternion.identity);
             randomVeclist.RemoveAt(0);
         }
         for (int i = 0; i < 20; i++)

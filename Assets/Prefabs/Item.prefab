@@ -105,6 +105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemImg: {fileID: 21300000, guid: 1d05fd91fb738024991f5ef5f901c2eb, type: 3}
+  price: 4
   TargetMask:
     serializedVersion: 2
     m_Bits: 1024
