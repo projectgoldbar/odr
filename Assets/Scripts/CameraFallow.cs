@@ -25,7 +25,7 @@ public class CameraFallow : MonoBehaviour
         var Move_vec = new Vector3(
             target.localPosition.x,
             target.localPosition.y + offset.y,
-            target.localPosition.z);
+            target.localPosition.z + (Vector3.forward * 3.0f).z);
 
         transform.position = Move_vec;
     }

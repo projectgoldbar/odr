@@ -2,16 +2,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum State { IDLE, PATROL, DEAD };
-
+public enum State { IDLE, PATROL, ATK, DEAD };
 public enum Pause { Stop = 0, Go }
 
 public class Enemy : MonoBehaviour
 {
     private State state = State.IDLE;
-
     private Pause pause;
-
     public Pause PAUSE
     {
         get { return pause; }
@@ -29,9 +26,10 @@ public class Enemy : MonoBehaviour
 
     [Tooltip("게임시작시 플레이어를 찾아넣음")]
     public Player target = null;
-
     [Tooltip("경직 후 다시 움직일때까지의 시간")]
     public float StopNGoTimer = 3;
+
+    private Animator Anim;
 
     private Coroutine Follow_OnOff;
     private Coroutine Processing;
@@ -61,6 +59,7 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         target = FindObjectOfType<Player>();
+        Anim = GetComponent<Animator>();
         stateImage = Instantiate(Ref.Instance.questionmark, Ref.Instance.canvas.transform);
     }
 
@@ -86,19 +85,31 @@ public class Enemy : MonoBehaviour
             {
                 case State.IDLE:
                     stateImage.sprite = Ref.Instance.questionmark.sprite;
+                    Anim.SetBool("Move", false);
                     break;
 
                 case State.PATROL:
                     Follow(target.transform);
+                    Anim.SetBool("Move", true);
+                    break;
+
+                case State.ATK:
+                    Anim.SetBool("Atk", true);
                     break;
 
                 case State.DEAD:
                     data.hp = 0;
                     break;
             }
-            yield return new WaitForSeconds(0.02f);
+            yield return new WaitForSeconds(0.002f);
             yield return null;
         }
+    }
+
+    public void AtkEnd()
+    {
+        Anim.SetBool("Atk", false);
+        Debug.Log("공격끝~");
     }
 
     private IEnumerator Process()
@@ -110,7 +121,11 @@ public class Enemy : MonoBehaviour
 
             if (data.hp > 0)
             {
-                if (magnitude <= 10)
+                if (magnitude <= 2)
+                {
+                    state = State.ATK;
+                }
+                else if (magnitude > 2 && magnitude <= 10)
                 {
                     state = State.PATROL;
                 }
@@ -134,14 +149,16 @@ public class Enemy : MonoBehaviour
 
         if (PAUSE == Pause.Go)
         {
+            Anim.SetBool("Move", true);
             stateImage.sprite = Ref.Instance.pointer.sprite;
             Quaternion rot = Quaternion.LookRotation(dir);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * data.speed * (int)PAUSE);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * data.speed * 1.5f * (int)PAUSE);
 
-            rid.MovePosition(transform.position + transform.forward * Time.fixedDeltaTime * data.speed * (int)PAUSE);
+            rid.MovePosition(transform.position + transform.forward * Time.deltaTime * data.speed * (int)PAUSE);
         }
         else
         {
+            Anim.SetBool("Move", false);
             stateImage.sprite = Ref.Instance.questionmark.sprite;
         }
     }

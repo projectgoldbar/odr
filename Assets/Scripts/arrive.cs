@@ -50,6 +50,6 @@ public class arrive : MonoBehaviour
         Ref.Instance.TargetDir_image.transform.position =
             Myself + (dir * dirDis);
 
-        Debug.Log(dir);
+       // Debug.Log(dir);
     }
 }
