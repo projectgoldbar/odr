@@ -109,7 +109,8 @@ public class Enemy : MonoBehaviour
     public void AtkEnd()
     {
         Anim.SetBool("Atk", false);
-        Debug.Log("공격끝~");
+        target.Hp -= 1;
+        Debug.Log("공격끝~" + target.Hp);
     }
 
     private IEnumerator Process()
