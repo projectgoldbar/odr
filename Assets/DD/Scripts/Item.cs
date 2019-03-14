@@ -49,6 +49,7 @@ public class Item : MonoBehaviour
     {
         Debug.Log("아이템사용");
         var a = FindVisibleTargets(playervecter, 40f, 60f, TargetMask, ObstacleMask);
+        var a = FindVisibleTargets(playervecter, 4f, 40f, TargetMask, ObstacleMask);
         for (int i = 0; i < a.Count; i++)
         {
             a[i].GetComponentInChildren<SkinnedMeshRenderer>().material.color = new Vector4(1, 1, 1, 1);
