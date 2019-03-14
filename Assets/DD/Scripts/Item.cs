@@ -19,7 +19,7 @@ public class Item : MonoBehaviour
         if (x != null)
         {
             playervecter = x.transform;
-            playerLight = other.transform.GetChild(1);
+            playerLight = other.transform.GetChild(0);
             //x.ItemChanged = () => { x.itemImage.sprite = itemImg; };
             if (x.inven.Count > 3)
             {
