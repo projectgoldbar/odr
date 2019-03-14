@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Collections;
 
 public class Item : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class Item : MonoBehaviour
     public int price = 1;
 
     private Transform playervecter;
+    private Transform playerLight;
     //public Transform playervecter;
 
     private void OnCollisionEnter(Collision other)
@@ -17,6 +19,7 @@ public class Item : MonoBehaviour
         if (x != null)
         {
             playervecter = x.transform;
+            playerLight = other.transform.GetChild(1);
             //x.ItemChanged = () => { x.itemImage.sprite = itemImg; };
             if (x.inven.Count > 3)
             {
@@ -48,12 +51,19 @@ public class Item : MonoBehaviour
     public void use()
     {
         Debug.Log("아이템사용");
-        var a = FindVisibleTargets(playervecter, 4f, 40f, TargetMask, ObstacleMask);
-        for (int i = 0; i < a.Count; i++)
+        playerLight.gameObject.SetActive(true);
+        playerLight.GetComponent<FlashLight>().Use();
+        var a = FindVisibleTargets(playervecter, 10f, 40f, TargetMask, ObstacleMask);
+        if (a != null)
         {
-            a[i].GetComponentInChildren<SkinnedMeshRenderer>().material.color = new Vector4(1, 1, 1, 1);
+            for (int i = 0; i < a.Count; i++)
+            {
+                a[i].GetComponentInChildren<SkinnedMeshRenderer>().material.color = new Vector4(1, 1, 1, 1);
+            }
         }
-        //Destroy(this.gameObject);
+        //playerLight.gameObject.SetActive(false);
+
+        Destroy(this.gameObject);
     }
 
     public List<Transform> FindVisibleTargets(Transform _transform, float ViewDistance, float ViewAngle, LayerMask TargetMask, LayerMask ObstacleMask)
