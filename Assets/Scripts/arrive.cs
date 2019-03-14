@@ -17,7 +17,7 @@ public class arrive : MonoBehaviour
         //float rd = Random.Range(0.0f, 360.0f);
         //delta.x = Mathf.Cos(rd) * distance;
         //delta.y = Mathf.Cos(rd) * distance;
-        Myself = Ref.Instance.TargetDir_image.transform.position;
+        //  Myself = Ref.Instance.TargetDir_image.transform.position;
         DestinationPoint.transform.position = Player.transform.position + Vector3.forward * distance;
     }
 
@@ -30,7 +30,7 @@ public class arrive : MonoBehaviour
         dirDis = dir.magnitude;
         Ref.Instance.Destination_text.text = (distance - (distance - dirDis)).ToString("0") + "m";
 
-        UI_Angle();
+        //UI_Angle();
     }
 
     private Vector2 AngelPos = Vector2.zero;
@@ -39,17 +39,12 @@ public class arrive : MonoBehaviour
     public void UI_Angle()
     {
         Vector3 worldArrow = Camera.main.WorldToScreenPoint(Player.transform.position);
-        // Ref.Instance.TargetDir_image.transform.position = worldArrow;
+        //  Ref.Instance.TargetDir_image.transform.position = worldArrow;
 
         var angle = Quaternion.LookRotation(dir).eulerAngles.y;
 
         // UI 회전
         Ref.Instance.TargetDir_image.transform.eulerAngles
             = new Vector3(0, 0, -angle);
-
-        Ref.Instance.TargetDir_image.transform.position =
-            Myself + (dir * dirDis);
-
-       // Debug.Log(dir);
     }
 }

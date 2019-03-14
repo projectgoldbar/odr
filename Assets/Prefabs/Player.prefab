@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c222d0a605d7f4aa9f3e9eda4535f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runSpeed: 4
+  runSpeed: 5
   rotSpeed: 6
   damp: 20
   rid: {fileID: 7139214044606770652}
@@ -124,6 +124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f57de406e6cc2c428a47e23029960e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Hpbar: {fileID: 0}
+  MaxHp: 0
 --- !u!54 &7139214044606770652
 Rigidbody:
   m_ObjectHideFlags: 0

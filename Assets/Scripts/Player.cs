@@ -1,8 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    public int Hp = 1;
+    public Scrollbar Hpbar;
+
+    public float MaxHp;
+
+    private float hp;
+
+    public float Hp
+    {
+        get => hp;
+        set
+        {
+            hp = value;
+            Hpbar.value = (Hp / MaxHp);
+        }
+    }
+
+    private void Awake()
+    {
+        Hp = MaxHp;
+    }
 }
