@@ -3,12 +3,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public enum State { IDLE, PATROL, ATK, DEAD };
+
 public enum Pause { Stop = 0, Go }
 
 public class Enemy : MonoBehaviour
 {
     private State state = State.IDLE;
     private Pause pause;
+
     public Pause PAUSE
     {
         get { return pause; }
@@ -17,7 +19,7 @@ public class Enemy : MonoBehaviour
             pause = value;
             if (pause == Pause.Stop)
             {
-                StartCoroutine(StopNGo(StopNGoTimer));
+                this.StartCoroutine(StopNGo(StopNGoTimer));
             }
         }
     }
@@ -26,6 +28,7 @@ public class Enemy : MonoBehaviour
 
     [Tooltip("게임시작시 플레이어를 찾아넣음")]
     public Player target = null;
+
     [Tooltip("경직 후 다시 움직일때까지의 시간")]
     public float StopNGoTimer = 3;
 
