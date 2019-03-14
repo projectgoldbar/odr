@@ -8,11 +8,11 @@ public class Item : MonoBehaviour
     public Sprite itemImg;
     public int price = 1;
 
-    private Transform playervecter;
-    private Transform playerLight;
+    protected Transform playervecter;
+    protected Transform playerLight;
     //public Transform playervecter;
 
-    private void OnCollisionEnter(Collision other)
+    protected void OnTriggerEnter(Collider other)
     {
         var x = other.gameObject.GetComponent<Inventory>();
 
@@ -21,7 +21,7 @@ public class Item : MonoBehaviour
             playervecter = x.transform;
             playerLight = other.transform.GetChild(0);
             //x.ItemChanged = () => { x.itemImage.sprite = itemImg; };
-            if (x.inven.Count > 3)
+            if (x.inven.Count > 2)
             {
                 x.inven[0] = this;
                 //Instantiate(itemImg);
@@ -48,10 +48,19 @@ public class Item : MonoBehaviour
     public LayerMask TargetMask;
     public LayerMask ObstacleMask;
 
-    public void use()
+    protected Color lightcolor = Color.white;
+
+    protected virtual void ColorSet()
+    {
+        lightcolor = Color.white;
+    }
+
+    public virtual void use()
     {
         Debug.Log("아이템사용");
         playerLight.gameObject.SetActive(true);
+        playerLight.GetComponent<Light>().color = lightcolor;
+
         playerLight.GetComponent<FlashLight>().Use();
         var a = FindVisibleTargets(playervecter, 10f, 40f, TargetMask, ObstacleMask);
         if (a != null)

@@ -18,6 +18,7 @@ public class Inventory : MonoBehaviour
         {
             Debug.Log("아이템다썻음");
             itemImage.sprite = null;
+            inven.RemoveAt(0);
             return;
         }
         else

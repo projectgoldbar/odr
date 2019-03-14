@@ -1,11 +1,23 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class Trap : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision other)
+    private void Awake()
+    {
+    }
+
+    private void OnTriggerEnter(Collider other)
     {
         Debug.Log("트랩발동");
         TrapOn();
+
+        Invoke("Destroy", 0.5f);
+        GetComponent<Collider>().enabled = false;
+    }
+
+    private void Destroy()
+    {
         Destroy(this.gameObject);
     }
 
@@ -15,6 +27,7 @@ public class Trap : MonoBehaviour
 
     private void TrapOn()
     {
+        transform.GetChild(0).GetComponent<ParticleSystem>().Play();
         Collider[] targets = Physics.OverlapSphere(transform.position, radius, targetMask);
         for (int i = 0; i < targets.Length; i++)
         {
