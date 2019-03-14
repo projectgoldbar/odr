@@ -48,7 +48,6 @@ public class Item : MonoBehaviour
     public void use()
     {
         Debug.Log("아이템사용");
-        var a = FindVisibleTargets(playervecter, 40f, 60f, TargetMask, ObstacleMask);
         var a = FindVisibleTargets(playervecter, 4f, 40f, TargetMask, ObstacleMask);
         for (int i = 0; i < a.Count; i++)
         {

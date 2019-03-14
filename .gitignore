@@ -35,3 +35,4 @@ sysinfo.txt
 *.apk
 *.unitypackage
 Assets/DD/DyTest.unity
+Assets/DD/Scripts/Item.cs
