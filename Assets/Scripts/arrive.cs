@@ -13,11 +13,6 @@ public class arrive : MonoBehaviour
 
     private void Awake()
     {
-        //Vector2 delta = Vector2.zero;
-        //float rd = Random.Range(0.0f, 360.0f);
-        //delta.x = Mathf.Cos(rd) * distance;
-        //delta.y = Mathf.Cos(rd) * distance;
-        //  Myself = Ref.Instance.TargetDir_image.transform.position;
         DestinationPoint.transform.position = Player.transform.position + Vector3.forward * distance;
     }
 
@@ -28,23 +23,10 @@ public class arrive : MonoBehaviour
         var destinationPos = DestinationPoint.position;
         dir = destinationPos - player;
         dirDis = dir.magnitude;
-        Ref.Instance.Destination_text.text = (distance - (distance - dirDis)).ToString("0") + "m";
+        var Prog_dis = distance - dirDis;
+        Ref.Instance.Destination_text.text = Prog_dis.ToString("0") + "m";
 
-        //UI_Angle();
-    }
-
-    private Vector2 AngelPos = Vector2.zero;
-    private Vector2 ps = new Vector2();
-
-    public void UI_Angle()
-    {
-        Vector3 worldArrow = Camera.main.WorldToScreenPoint(Player.transform.position);
-        //  Ref.Instance.TargetDir_image.transform.position = worldArrow;
-
-        var angle = Quaternion.LookRotation(dir).eulerAngles.y;
-
-        // UI 회전
-        Ref.Instance.TargetDir_image.transform.eulerAngles
-            = new Vector3(0, 0, -angle);
+        if (Prog_dis < 0) Ref.Instance.Destination_text.color = Color.red;
+        else Ref.Instance.Destination_text.color = Color.white;
     }
 }
