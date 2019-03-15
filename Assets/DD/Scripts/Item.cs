@@ -62,13 +62,13 @@ public class Item : MonoBehaviour
         playerLight.GetComponent<Light>().color = lightcolor;
 
         playerLight.GetComponent<FlashLight>().Use();
-        var a = FindVisibleTargets(playervecter, 10f, 40f, TargetMask, ObstacleMask);
+        var a = FindVisibleTargets(playervecter, 30f, 60f, TargetMask, ObstacleMask);
         if (a != null)
         {
             for (int i = 0; i < a.Count; i++)
             {
                 //a[i].GetComponentInChildren<SkinnedMeshRenderer>().material.color = lightcolor;
-                a[i].GetComponent<EnemyData>().OndirectDamage(lightcolor);
+                a[i].GetComponentInChildren<EnemyData>().OndirectDamage(lightcolor);
             }
         }
         //playerLight.gameObject.SetActive(false);

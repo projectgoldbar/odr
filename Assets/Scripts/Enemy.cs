@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour
     private Coroutine Follow_OnOff;
     private Coroutine Processing;
 
-    private Image stateImage;
+    public Image stateImage;
 
     public EnemyData data;
 

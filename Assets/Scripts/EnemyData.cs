@@ -10,7 +10,12 @@ public class EnemyData : MonoBehaviour
     public int gold;
     public Action SomeThing = () => { };
 
-    public Material material;
+    private Color color;
+
+    private void Awake()
+    {
+        color = GetComponentInChildren<SkinnedMeshRenderer>().material.color;
+    }
 
     //public void OnHit(Color lightColor)
     //{
@@ -19,14 +24,15 @@ public class EnemyData : MonoBehaviour
 
     public void OndirectDamage(Color lightColor)
     {
-        if (material.color == lightColor)
+        if (color == lightColor)
         {
             ItemGoldDataBase.instance.gold += gold;
+            Destroy(this.gameObject.GetComponent<Enemy>().stateImage);
             Destroy(this.gameObject);
         }
         else
         {
-            material.color = lightColor;
+            this.gameObject.transform.localScale *= 2;
             speed += 1f;
         }
     }
