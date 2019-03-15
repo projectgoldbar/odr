@@ -452,15 +452,15 @@ SkinnedMeshRenderer:
   m_GameObject: {fileID: 5360875221504423378}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 89538bd2e255e6a44953e29ea5c50d30, type: 2}
+  - {fileID: 2100000, guid: 086cf3e4c91592e46aa936accc93f21e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -589,7 +589,7 @@ GameObject:
   - component: {fileID: 5937125167575425298}
   - component: {fileID: 3967625777146463197}
   m_Layer: 10
-  m_Name: Enemy (1)
+  m_Name: EnemyRed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -690,6 +690,7 @@ MonoBehaviour:
   speed: 8
   hp: 1
   gold: 3
+  material: {fileID: 2100000, guid: 086cf3e4c91592e46aa936accc93f21e, type: 2}
 --- !u!1 &5940917725385827121
 GameObject:
   m_ObjectHideFlags: 0

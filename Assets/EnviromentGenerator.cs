@@ -7,8 +7,10 @@ public class EnviromentGenerator : MonoBehaviour
     private List<GameObject> itemlist;
     public GameObject trapPreFab;
     public int count;
+    public int enemyCount;
 
     public List<GameObject> enviroPreFab = new List<GameObject>();
+    public List<GameObject> enemyPreFab = new List<GameObject>();
 
     private void Awake()
     {
@@ -25,6 +27,7 @@ public class EnviromentGenerator : MonoBehaviour
         VectorSet(count);
         ItemTrapSet();
         EnviromentSet();
+        EnemySet(enemyCount);
     }
 
     private List<Vector3> randomVeclist = new List<Vector3>();
@@ -68,6 +71,16 @@ public class EnviromentGenerator : MonoBehaviour
         {
             var x = Random.Range(0, enviroPreFab.Count);
             Instantiate(enviroPreFab[x], randomVeclist[0], Quaternion.identity);
+            randomVeclist.RemoveAt(0);
+        }
+    }
+
+    private void EnemySet(int enemycount)
+    {
+        for (int i = 0; i < enemycount; i++)
+        {
+            var x = Random.Range(0, enemyPreFab.Count);
+            Instantiate(enemyPreFab[x], randomVeclist[0], Quaternion.identity);
             randomVeclist.RemoveAt(0);
         }
     }

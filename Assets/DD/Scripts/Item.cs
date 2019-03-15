@@ -67,7 +67,8 @@ public class Item : MonoBehaviour
         {
             for (int i = 0; i < a.Count; i++)
             {
-                a[i].GetComponentInChildren<SkinnedMeshRenderer>().material.color = new Vector4(1, 1, 1, 1);
+                //a[i].GetComponentInChildren<SkinnedMeshRenderer>().material.color = lightcolor;
+                a[i].GetComponent<EnemyData>().OndirectDamage(lightcolor);
             }
         }
         //playerLight.gameObject.SetActive(false);

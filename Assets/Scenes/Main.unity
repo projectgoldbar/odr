@@ -221,12 +221,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AllitemList:
-  - {fileID: 8757089505268212768, guid: 9d3b9bf01ac994b4c9fa6fa184cf8c8a, type: 3}
-  - {fileID: 8757089505268212768, guid: 9d3b9bf01ac994b4c9fa6fa184cf8c8a, type: 3}
+  - {fileID: 8757089505268212768, guid: 74a8d81bc12443640b749b91321dd729, type: 3}
+  - {fileID: 8757089505268212768, guid: 8b91fcef9656a974ea2c9f75e7917099, type: 3}
   SpwanItemDataList:
   - {fileID: 8757089505268212768, guid: 9d3b9bf01ac994b4c9fa6fa184cf8c8a, type: 3}
-  - {fileID: 8757089505268212768, guid: 9d3b9bf01ac994b4c9fa6fa184cf8c8a, type: 3}
-  - {fileID: 8757089505268212768, guid: 9d3b9bf01ac994b4c9fa6fa184cf8c8a, type: 3}
+  - {fileID: 8757089505268212768, guid: 74a8d81bc12443640b749b91321dd729, type: 3}
+  - {fileID: 8757089505268212768, guid: 8b91fcef9656a974ea2c9f75e7917099, type: 3}
   gold: 50
 --- !u!4 &13139677
 Transform:
