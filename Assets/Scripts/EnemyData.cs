@@ -9,6 +9,7 @@ public class EnemyData : MonoBehaviour
     public int hp;
     public int gold;
     public Action SomeThing = () => { };
+    public ParticleSystem deathFx;
 
     private Color color;
 
@@ -24,16 +25,25 @@ public class EnemyData : MonoBehaviour
 
     public void OndirectDamage(Color lightColor)
     {
-        if (color == lightColor)
+        if (color == lightColor || hp <= 1)
         {
             ItemGoldDataBase.instance.gold += gold;
-            Destroy(this.gameObject.GetComponent<Enemy>().stateImage);
-            Destroy(this.gameObject);
+            speed = 0;
+            deathFx.Play();
+            Invoke("DestroyGo", 1f);
         }
         else
         {
             this.gameObject.transform.localScale *= 2;
+            hp--;
+
             speed += 1f;
         }
+    }
+
+    private void DestroyGo()
+    {
+        Destroy(this.gameObject.GetComponent<Enemy>().stateImage);
+        Destroy(this.gameObject);
     }
 }
