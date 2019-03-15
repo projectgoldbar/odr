@@ -10,22 +10,29 @@ public class Inventory : MonoBehaviour
     public List<Item> inven = new List<Item>();
 
     //public Queue<Item> inventory = new Queue<Item>();
+
     public event Action ItemChanged = () => { };
 
     public void use()
     {
-        if (inven[0] == null)
+        if (inven.Count >= 1)
         {
-            Debug.Log("아이템다썻음");
-            itemImage.sprite = null;
+            inven[0].use();
+            //Destroy(inven[0].gameObject);
             inven.RemoveAt(0);
-            return;
+            if (inven.Count == 0)
+            {
+                itemImage.sprite = null;
+            }
+            else
+                itemImage.sprite = inven[0].itemImg;
         }
         else
         {
-            inven[0].use();
-            itemImage.sprite = inven[1].itemImg;
-            inven.RemoveAt(0);
+            Debug.Log("아이템다썻음");
+            itemImage.sprite = null;
+            //Destroy(inven[0].gameObject);
+            //inven.RemoveAt(0);
         }
     }
 

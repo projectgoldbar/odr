@@ -17,7 +17,7 @@ public class ArrowPos : MonoBehaviour
         //화면 밖이면 1보다 높다.
 
         Vector3 pos = Camera.main.WorldToViewportPoint(target.position);
-        Debug.Log("처음-Pos : " + pos);
+        // Debug.Log("처음-Pos : " + pos);
 
         //도착위치가 카메라 안에 들어왔다면
         if ((pos.x < 1.0f && pos.x > 0.0f) && (pos.y < 1.0f && pos.y > 0.0f))
@@ -28,13 +28,13 @@ public class ArrowPos : MonoBehaviour
         }
 
         pos *= 2.0f;
-        Debug.Log("pos *= 2.0f : " + pos);
+        //Debug.Log("pos *= 2.0f : " + pos);
         pos = new Vector3(pos.x - 1, pos.y - 1, pos.z - 1);
-        Debug.Log("pos -1 : " + pos);
+        //Debug.Log("pos -1 : " + pos);
         if (Mathf.Abs(pos.x) > Mathf.Abs(pos.y))
         {
             pos.y = pos.y / Mathf.Abs(pos.x);
-            Debug.Log("pos.y / Mathf.Abs(pos.x) : " + pos);
+            //  Debug.Log("pos.y / Mathf.Abs(pos.x) : " + pos);
             if (pos.x > 1)
                 pos.x = 1;
             else if (pos.x < -1)
@@ -43,16 +43,16 @@ public class ArrowPos : MonoBehaviour
         else
         {
             pos.x = pos.x / Mathf.Abs(pos.y);
-            Debug.Log("pos.x / Mathf.Abs(pos.y) : " + pos);
+            //Debug.Log("pos.x / Mathf.Abs(pos.y) : " + pos);
             if (pos.y > 1)
                 pos.y = 1;
             else if (pos.y < -1)
                 pos.y = -1;
         }
         pos = new Vector3(pos.x + 1, pos.y + 1, pos.z + 1);
-        Debug.Log("pos+1 : " + pos);
+        //Debug.Log("pos+1 : " + pos);
         pos /= 2.0f;
-        Debug.Log("pos/=2 : " + pos);
+        //Debug.Log("pos/=2 : " + pos);
         transform.position =
                         Vector3.Lerp(transform.position,
                         Camera.main.ViewportToWorldPoint(pos),
