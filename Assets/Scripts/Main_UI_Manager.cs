@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Main_UI_Manager : MonoBehaviour
 {
@@ -15,6 +15,11 @@ public class Main_UI_Manager : MonoBehaviour
     public void GameStart()
     {
         SceneManager.LoadScene("game");
+    }
+
+    public void TestScene()
+    {
+        SceneManager.LoadScene("PT_Test");
     }
 
     public void ShopOpen()
