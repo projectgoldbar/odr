@@ -37,7 +37,8 @@ public class EnemyData : MonoBehaviour
                 }
                 else if (itemType == Type.Rock)
                 {
-                    DestroyGo();
+                    deathFx.Play();
+                    Invoke("DestroyGo", 1f);
                 }
                 else if (itemType == Type.Crepe)
                 {
@@ -52,7 +53,8 @@ public class EnemyData : MonoBehaviour
                 }
                 else if (itemType == Type.Crepe)
                 {
-                    DestroyGo();
+                    deathFx.Play();
+                    Invoke("DestroyGo", 1f);
                 }
                 else if (itemType == Type.Scissors)
                 {
@@ -67,7 +69,8 @@ public class EnemyData : MonoBehaviour
                 }
                 else if (itemType == Type.Scissors)
                 {
-                    DestroyGo();
+                    deathFx.Play();
+                    Invoke("DestroyGo", 1f);
                 }
                 else if (itemType == Type.Rock)
                 {

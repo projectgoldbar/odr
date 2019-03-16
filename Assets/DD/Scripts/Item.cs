@@ -26,7 +26,7 @@ public class Item : MonoBehaviour
             {
                 x.inven[0] = this;
                 //Instantiate(itemImg);
-                x.itemImage.sprite = itemImg;
+                //x.itemImage.sprite = itemImg;
                 this.gameObject.SetActive(false);
             }
             else
@@ -34,8 +34,9 @@ public class Item : MonoBehaviour
                 x.inven.Add(this);
 
                 //Instantiate(itemImg);
-                x.itemImage.sprite = itemImg;
+                //x.itemImage.sprite = itemImg;
             }
+            x.ItemImgChange();
             this.gameObject.SetActive(false);
         }
         else
