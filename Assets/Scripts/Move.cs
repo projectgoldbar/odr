@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Move : MonoBehaviour
 {
@@ -25,43 +26,49 @@ public class Move : MonoBehaviour
 #if UNITY_EDITOR
 
         touchPos = Input.mousePosition;
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (touchPos.x <= Screen.width * 0.5)
-            {
-                rotState = RotState.왼쪽;
-            }
-            else
-            {
-                rotState = RotState.오른쪽;
-            }
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            rotState = RotState.전진;
-        }
 
-#else
-        if (Input.touchCount > 0)
+        if (EventSystem.current.IsPointerOverGameObject() == false)
         {
-            touchPos = Input.GetTouch(0).position;
-            if (Input.GetTouch(0).phase == TouchPhase.Began)
+            if (Input.GetMouseButtonDown(0))
             {
-                 if (touchPos.x <= Screen.width * 0.5)
+                if (touchPos.x <= Screen.width * 0.5)
                 {
-                   rotState = RotState.왼쪽;
+                    rotState = RotState.왼쪽;
                 }
                 else
                 {
                     rotState = RotState.오른쪽;
                 }
             }
-            else if (Input.GetTouch(0).phase == TouchPhase.Ended)
+            else if (Input.GetMouseButtonUp(0))
             {
                 rotState = RotState.전진;
             }
         }
 
+#else
+        if (EventSystem.current.IsPointerOverGameObject() == false)
+        {
+            if (Input.touchCount > 0)
+            {
+                touchPos = Input.GetTouch(0).position;
+                if (Input.GetTouch(0).phase == TouchPhase.Began)
+                {
+                     if (touchPos.x <= Screen.width * 0.5)
+                    {
+                       rotState = RotState.왼쪽;
+                    }
+                    else
+                    {
+                        rotState = RotState.오른쪽;
+                    }
+                }
+                else if (Input.GetTouch(0).phase == TouchPhase.Ended)
+                {
+                    rotState = RotState.전진;
+                }
+            }
+        }
 #endif
     }
 

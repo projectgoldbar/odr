@@ -144,7 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 284584787}
   DestinationPoint: {fileID: 1532023042}
-  distance: 500
+  distance: 50
 --- !u!4 &56344830
 Transform:
   m_ObjectHideFlags: 0
@@ -612,7 +612,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Hpbar: {fileID: 1127639589}
-  MaxHp: 10
+  MaxHp: 50
 --- !u!114 &284584789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -626,7 +626,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotState: 0
-  runSpeed: 3
+  runSpeed: 2
   rotSpeed: 6
   damp: 20
   rid: {fileID: 284584791}

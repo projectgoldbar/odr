@@ -35,19 +35,19 @@ public class ArrowPos : MonoBehaviour
         {
             pos.y = pos.y / Mathf.Abs(pos.x);
             //  Debug.Log("pos.y / Mathf.Abs(pos.x) : " + pos);
-            if (pos.x > 1)
-                pos.x = 1;
-            else if (pos.x < -1)
-                pos.x = -1;
+            if (pos.x > 0.9)
+                pos.x = 0.9f;
+            else if (pos.x < -0.9)
+                pos.x = -0.9f;
         }
         else
         {
             pos.x = pos.x / Mathf.Abs(pos.y);
             //Debug.Log("pos.x / Mathf.Abs(pos.y) : " + pos);
-            if (pos.y > 1)
-                pos.y = 1;
-            else if (pos.y < -1)
-                pos.y = -1;
+            if (pos.y > 0.9)
+                pos.y = 0.9f;
+            else if (pos.y < -0.9)
+                pos.y = -0.9f;
         }
         pos = new Vector3(pos.x + 1, pos.y + 1, pos.z + 1);
         //Debug.Log("pos+1 : " + pos);
