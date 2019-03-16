@@ -7,6 +7,7 @@ public class Item : MonoBehaviour
 {
     public Sprite itemImg;
     public int price = 1;
+    public Type type = Type.Scissors;
 
     protected Transform playervecter;
     protected Transform playerLight;
@@ -68,7 +69,7 @@ public class Item : MonoBehaviour
             for (int i = 0; i < a.Count; i++)
             {
                 //a[i].GetComponentInChildren<SkinnedMeshRenderer>().material.color = lightcolor;
-                a[i].GetComponentInChildren<EnemyData>().OndirectDamage(lightcolor);
+                a[i].GetComponentInChildren<EnemyData>().OndirectDamage(lightcolor, type);
             }
         }
         //playerLight.gameObject.SetActive(false);
